@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>{{ title }}</title>
+
+        <link href="static/css/min.css" rel="stylesheet" type="text/css">
+        <link href="static/css/style.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="/static/js/socket.io.js"></script>
+        <script type="text/javascript" src="/static/js/feed.js"></script>
+    </head>
+	<body onload="display()">
+		<nav class="nav" tabindex="-1" onclick="this.focus()">
+			<div class="container">
+				<a class="pagename current" href="#">Management</a>
+                {% if loggedin %}
+                    <a href="/logout">logout</a>
+                {% endif %}
+            </div>
+		</nav>
+		<button class="btn-close btn btn-sm">×</button>
+		<div class="container">
+            {% if loggedin %}
+            <div id="main">
+                <h2>Camera</h2>
+                <img id="picture" src="/photo" width="100%">
+                </img>
+                <h2>Faces</h2>
+                <p id="faces">
+                </p>
+                <h2>Settings</h2>
+                <h3>Message To Display</h3>
+                <form method="POST" action="/message">
+                    <input name="message" type="text"></input>
+                    <input type="submit" value="Set Message"></input>
+                </form>
+                <h3>Email</h3>
+                <form method="POST" action="/settings">
+                    <input name="email" type="text"></input></br>
+                    <input type="submit" value="Submit">
+                </form>
+
+            </di/v>
+            {% endif %}
+            {% if not loggedin %}
+			<div id="login">
+                <h1>Login</h1>
+                <form method="POST">
+                    <input name="username" type="text" value="Username"></input><br />
+                    <input name="password" type="password" value="Password"></input><br />
+                    <input type="submit" value="Login">
+                </form>
+            </div>
+            {% endif %}
+		</div>
+	</body>
+</html>
+
